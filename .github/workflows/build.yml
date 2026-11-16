@@ -29,6 +29,9 @@ jobs:
             ccache-exynos2100-
           save-always: true
 
+      - name: Update submodules
+        run: git submodule update --init --force --recursive
+
       - name: Prepare enviroment
         run: |
           sudo apt update
