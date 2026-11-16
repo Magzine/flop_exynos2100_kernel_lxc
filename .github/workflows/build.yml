@@ -429,7 +429,8 @@ jobs:
 
       - name: Publish release to artifacts repo
         env:
-          GH_TOKEN: ${{ secrets.FLOPPY2100_CI_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+
         run: |
           set -e
           TARGET_REPO="FlopKernel-Series/floppy2100-ci"
