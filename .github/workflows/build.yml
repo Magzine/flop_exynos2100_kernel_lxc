@@ -57,6 +57,17 @@ jobs:
             fi
           fi
 
+
+      - name: Injecting Config
+        run: |
+          scripts/config --file arch/arm64/configs/exynos2100-unified_defconfig \
+          -e SYSVIPC -e POSIX_MQUEUE -e IPC_NS -e PID_NS -e DEVTMPFS \
+          -e CGROUP_DEVICE -e USER_NS -e FHANDLE \
+          -e MACVLAN -e VLAN_8021Q -e NETFILTER_XT_TARGET_CHECKSUM \
+          -e CGROUP_PIDS -e IP6_NF_NAT -e IP6_NF-TARGET_MASQUERADE \
+          -e CFS_BANDWIDTH -e ARM64_LSE_ATOMOCS -e UCLAMP_TASK \
+          -e UCLAMP_TASK_GROUP -e TCP_CONG_BBR
+
       - name: Build (KernelSU Next)
         run: |
           rm -f build/*.zip build/*.tar build/TARs_*.zip log.txt || true
