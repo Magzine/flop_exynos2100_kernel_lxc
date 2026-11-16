@@ -60,13 +60,18 @@ jobs:
 
       - name: Injecting Config
         run: |
+          make ARCH=arm64 exynos2100-unified_defconfig &&
           scripts/config --file arch/arm64/configs/exynos2100-unified_defconfig \
           -e SYSVIPC -e POSIX_MQUEUE -e IPC_NS -e PID_NS -e DEVTMPFS \
           -e CGROUP_DEVICE -e USER_NS -e FHANDLE \
           -e MACVLAN -e VLAN_8021Q -e NETFILTER_XT_TARGET_CHECKSUM \
-          -e CGROUP_PIDS -e IP6_NF_NAT -e IP6_NF-TARGET_MASQUERADE \
-          -e CFS_BANDWIDTH -e ARM64_LSE_ATOMOCS -e UCLAMP_TASK \
-          -e UCLAMP_TASK_GROUP -e TCP_CONG_BBR
+          -e CGROUP_PIDS -e IP6_NF_NAT -e IP6_NF_TARGET_MASQUERADE \
+          -e CFS_BANDWIDTH -e ARM64_LSE_ATOMICS -e UCLAMP_TASK \
+          -e UCLAMP_TASK_GROUP -e TCP_CONG_BBR -e TCP_CONG_ADVANCE \
+          -e NF_NAT -e IP_NF_NAT -e IP_NF_TARGET_MASQUERADE -e CGROUP_SCHED \
+          -e NETFILTER_XT_MATCH_ADDRTYPE -e NETFILTER_XT_MATCH_CONNTRACK \
+          -e MEMCG -e CPUSETS -e CGROUP_FREEZER -e CGROUP_SCHED \
+          -e VETH -e BRIDGE -e UTS_NS -e NET_NS
 
       - name: Build (KernelSU Next)
         run: |
